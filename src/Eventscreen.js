@@ -1,68 +1,91 @@
-fetch('https://match-time-backend.vercel.app/eventos')
-    .then(response => response.json())
-    .then(data => {
-        const eventContainer = document.getElementById('event-container');
-        data.forEach(evento => {
-            const newDiv = document.createElement('div');
-            newDiv.className = 'row efeito-fundo';
-            newDiv.style.borderRadius = '10px';
-            newDiv.style.marginBottom = '30px';
-            newDiv.style.display = 'flex';
-            newDiv.style.padding = '20px';
+$(document).ready(function () {
+    $.ajax({
+        url: 'https://match-time-backend.vercel.app/eventos',
+        dataType: 'json',
+        success: function (data) {
+            mostraEventos(data);
+        },
+        error: function (xhr, status, error) {
+            console.error('Erro ao carregar dados:', status, error);
+        }
+    });
+});
 
-            const imgDiv = document.createElement('div');
-            imgDiv.className = 'col-lg-2 col-md-6 col-sm-12 event';
-            imgDiv.style.display = 'flex';
-            imgDiv.style.justifyContent = 'center';
-            imgDiv.style.textAlign = 'center';
+function mostraEventos(eventos) {
+    var eventContainer = $('#event-container');
 
-            const img = document.createElement('img');
-            img.style.width = '85%';
-            img.style.height = '100%';
-            img.style.borderRadius = '30px';
-            img.className = 'game-poster';
-            img.src = evento.img;
-
-            imgDiv.appendChild(img);
-
-            const textDiv = document.createElement('div');
-            textDiv.className = 'col-lg-9 col-md-6 col-sm-12';
-
-            const eventText = document.createElement('div');
-            eventText.className = 'event-text';
-
-            const title = document.createElement('h4');
-            title.style.margin = '10px';
-            title.style.padding = '5px';
-            title.style.textAlign = 'left';
-            title.style.color = 'white';
-            title.style.textShadow = '0 0 0.2em #87F, 0 0 0.2em #87F, 0 0 0.2em #87F';
-            title.textContent = evento.Titulo;
-
-            const description = document.createElement('p');
-            description.textContent = evento.descricao;
-
-            const playButton = document.createElement('button');
-            playButton.className = 'button-gamer';
-            playButton.style.padding = '10px';
-            playButton.style.alignSelf = 'auto';
-            playButton.style.backgroundColor = 'azure';
-            playButton.type = 'button';
-            playButton.textContent = 'Jogar Agora';
-            playButton.onclick = function () {
-                window.location.href = 'lobby-room.html';
-            };
-
-            eventText.appendChild(title);
-            eventText.appendChild(description);
-            eventText.appendChild(playButton);
-
-            textDiv.appendChild(eventText);
-
-            newDiv.appendChild(imgDiv);
-            newDiv.appendChild(textDiv);
-
-            eventContainer.appendChild(newDiv);
+    $.each(eventos, function (index, eventData) {
+        var newDiv = $('<div>', {
+            class: 'row efeito-fundo',
+            css: {
+                borderRadius: '10px',
+                marginBottom: '30px',
+                display: 'flex',
+                padding: '20px'
+            }
         });
-    })
-    .catch(error => console.error('Erro ao obter os dados:', error));
+
+        var imgDiv = $('<div>', {
+            class: 'col-lg-2 col-md-6 col-sm-12 event',
+            css: {
+                display: 'flex',
+                justifyContent: 'center',
+                textAlign: 'center'
+            }
+        });
+
+        var img = $('<img>', {
+            class: 'game-poster',
+            css: {
+                width: '85%',
+                height: '100%',
+                borderRadius: '30px'
+            },
+            src: eventData.img
+        });
+
+        imgDiv.append(img);
+
+        var textDiv = $('<div>', {
+            class: 'col-lg-9 col-md-6 col-sm-12'
+        });
+
+        var eventText = $('<div>', {
+            class: 'event-text'
+        });
+
+        var title = $('<h4>', {
+            text: eventData.Titulo,
+            css: {
+                margin: '10px',
+                padding: '5px',
+                textAlign: 'left',
+                color: 'white',
+                textShadow: '0 0 0.2em #87F, 0 0 0.2em #87F, 0 0 0.2em #87F'
+            }
+        });
+
+        var description = $('<p>', {
+            text: eventData.descricao
+        });
+
+        var playButton = $('<button>', {
+            class: 'button-gamer',
+            css: {
+                padding: '10px',
+                alignSelf: 'auto',
+                backgroundColor: 'azure'
+            },
+            type: 'button',
+            text: 'Jogar Agora',
+            click: function () {
+                window.location.href = 'lobby-room.html';
+            }
+        });
+
+        eventText.append(title, description, playButton);
+        textDiv.append(eventText);
+        newDiv.append(imgDiv, textDiv);
+        eventContainer.append(newDiv);
+    });
+}
