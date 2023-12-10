@@ -60,8 +60,8 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   const scrollScreen = () => {
-    window.scrollTo({
-      top: document.body.scrollHeight,
+    window.document.querySelector("#rolar").scrollTo({
+      top: document.querySelector("#rolar").scrollHeight,
       behavior: "smooth"
     })
   }
