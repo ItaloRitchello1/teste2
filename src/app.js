@@ -59,6 +59,13 @@ document.addEventListener("DOMContentLoaded", function () {
     return colors[randomIndex]
   }
 
+  const scrollScreen = () => {
+    window.scrollTo({
+      top: document.body.scrollHeight,
+      behavior: "smooth"
+    })
+  }
+
   const processMessage = ({ data }) => {
     const { userId, userName, userColor, content } = JSON.parse(data)
 
@@ -70,10 +77,6 @@ document.addEventListener("DOMContentLoaded", function () {
     chatMessages.appendChild(message)
     scrollScreen()
   }
-
-  const scrollScreen = () => {
-    chatMessagesWrapper.scrollTop = chatMessagesWrapper.scrollHeight;
-  };
 
   const handleLogin = (event) => {
     event.preventDefault()
