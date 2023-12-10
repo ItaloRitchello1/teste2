@@ -3,25 +3,26 @@ var gameroomData = {
         {
             "name": "Cs",
             "imagePath": "img/cs-icon.png",
-            "roomLink": "lobby-room-cs.html",
+            "roomLink": "lobby-room.html",
         },
         {
             "name": "Vava",
             "imagePath": "img/valorant-icon.png",
-            "roomLink": "lobby-room-valorant.html",
+            "roomLink": "lobby-room.html",
         },
         {
             "name": "Lol",
             "imagePath": "img/lol-icon.png",
-            "roomLink": "lobby-room-lol.html",
+            "roomLink": "lobby-room.html",
         },
         {
             "name": "Rocket",
             "imagePath": "img/rocket-icon.png",
-            "roomLink": "lobby-room-rocket.html",
+            "roomLink": "lobby-room.html",
         }
     ]
 };
+
 
 function randomizarSalas() {
     var numSalas = 8;
