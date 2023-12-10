@@ -1,4 +1,3 @@
-
 fetch('https://match-time-backend.vercel.app/eventos')
     .then(response => response.json())
     .then(data => {
@@ -67,4 +66,3 @@ fetch('https://match-time-backend.vercel.app/eventos')
         });
     })
     .catch(error => console.error('Erro ao obter os dados:', error));
-
